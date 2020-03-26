@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+      <script src="../../lib/jquery/jquery.js"></script>
+      <script src="../../lib/underscore/underscore.js"></script>
+      <script src="../tester/tester.js"></script>
+    </head>
+    <body>
+      <label>Size of stack/queue: </label><input type="number" min="0" id="depth"/><br>
+      <label>Number of cycles: </label><input type="number" min="0" id="iterations"/><br>
+      <label>Q/S: </label><select id="type">
+        <option value="stack">stack</option>
+        <option value="queue">queue</option>
+      </select><br>
+      <label>Implementation: </label><select id="implementation">
+        <option value="es6">es6</option>
+        <option value="functional">functional</option>
+        <option value="functional-shared">functional-shared</option>
+        <option value="prototypal">prototypal</option>
+        <option value="pseudoclassical">pseudoclassical</option>
+      </select><br>
+      <button onclick="testNow();">TEST</button>
+        <script>
+            function testNow() {
+                // Is the input empty?
+                var depth = +$("#depth").val();
+                var iterations = +$("#iterations").val();
+                var type = $("#type").val();
+                var implementation = $("#implementation").val();
+
+                runTests(depth, iterations, type, implementation);
+              }
+        </script>
+    </body>
+</html>
