@@ -127,6 +127,31 @@ var runTests = function(depth, iterations, type, implementation) {
       var tester = new Stack();
       return tester;
 
+    } else if (implementation === 'fastpseudo') {
+      var Stack = function() {
+        this.storage = {};
+        this.top = 0;
+      };
+
+      Stack.prototype.push = function(value) {
+        this.storage[this.size()] = value;
+        this.top++;
+      };
+
+      Stack.prototype.pop = function() {
+        var popped = this.storage[this.size() - 1];
+        delete this.storage[this.size() - 1];
+        this.top--;
+        return popped;
+      };
+
+      Stack.prototype.size = function() {
+        return this.top;
+      };
+
+      var tester = new Stack();
+      return tester;
+
     }
   };
 
@@ -173,7 +198,7 @@ var runTests = function(depth, iterations, type, implementation) {
           for (let i = 0; i < someInstance.size(); i++) {
             storage[i] = storage[i + 1];
           }
-          delete storage[someInstance.size() -1];
+          delete storage[someInstance.size() - 1];
           return removed;
         };
 
@@ -267,6 +292,36 @@ var runTests = function(depth, iterations, type, implementation) {
       var tester = new Queue();
       return tester;
 
+    } else if (implementation === 'fastpseudo') {
+      var Queue = function() {
+        this.storage = {};
+        this.head = 0;
+        this.tail = -1;
+      };
+
+      Queue.prototype.enqueue = function(value) {
+        this.tail++;
+        this.storage[this.tail] = value;
+      };
+
+      Queue.prototype.dequeue = function() {
+        var dequeued = this.storage[head];
+        delete this.storage[this.head];
+        this.head++;
+        if (this.size === -1) {
+          this.head = 0;
+          this.tail = -1;
+        }
+        return dequeued;
+      };
+
+      Queue.prototype.size = function() {
+        return tail - head;
+      };
+
+      var tester = new Queue();
+      return tester;
+
     }
 
   };
@@ -300,5 +355,7 @@ var runTests = function(depth, iterations, type, implementation) {
     var tester = makeQueue(implementation);
     queueTests();
   }
+
+  console.log('Done');
 
 };
