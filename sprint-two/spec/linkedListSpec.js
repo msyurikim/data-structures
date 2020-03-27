@@ -52,4 +52,8 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should accept valueless Node', function() {
+    linkedList.addToTail();
+    expect(linkedList.removeHead()).to.equal(null);
+  });
 });

@@ -7,6 +7,9 @@ var BinarySearchTree = function(value) {
 };
 
 BinarySearchTree.prototype.insert = function(value) {
+  if (typeof value !== 'number') {
+    return;
+  }
   if (this.value === value) {
     return;
   } else if (value < this.value) {

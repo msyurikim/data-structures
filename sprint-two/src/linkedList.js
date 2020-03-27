@@ -42,7 +42,7 @@ var LinkedList = function() {
 var Node = function(value) {
   var node = {};
 
-  node.value = value;
+  node.value = value || null;
   node.next = null;
 
   return node;

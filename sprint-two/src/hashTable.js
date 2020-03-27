@@ -18,7 +18,7 @@ HashTable.prototype.insert = function(k, v) {
   if (kIndex !== -1) {
     bucket[kIndex][1] = v;
   } else {
-    bucket.push([k,v]);
+    bucket.push([k, v]);
   }
   this._storage.set(index, bucket);
 };
