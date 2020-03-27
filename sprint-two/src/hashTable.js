@@ -7,26 +7,20 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-
-  // 1) get the bucket at the index the hasher instructs (or if that index is empty make a new empty array to be your bucket)
   var bucket = this._storage.get(index) || [];
   var kIndex = -1;
-  // 2) check the bucket for a tuple that starts with k       [k, v]
-  //key --> numerical index
+
   for (var i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
       kIndex = i;
     }
   }
-  // 3) if yes, overwrite value; if no, push a new tuple
   if (kIndex !== -1) {
     bucket[kIndex][1] = v;
   } else {
     bucket.push([k,v]);
   }
-  // 4) put the bucket back
   this._storage.set(index, bucket);
-  //storage[index] = bucket = [[k, v], [k2, v2]....]
 };
 
 HashTable.prototype.retrieve = function(k) {
