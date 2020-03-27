@@ -7,28 +7,65 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  //if (this._storage.get(index) === undefined) {
-  // if the first member of what's here is the k you gave me, overwrite, otherwise add another kv pair?)
-  //if === undefined make an object add kv, otherwise add kv to the object that's already there?
-  //if (this._storage)
-  this._storage.set(index, obj);
-  //}
+
+  // 1) get the bucket at the index the hasher instructs (or if that index is empty make a new empty array to be your bucket)
+  var bucket = this._storage.get(index) || [];
+  var kIndex = -1;
+  // 2) check the bucket for a tuple that starts with k       [k, v]
+  //key --> numerical index
+  for (var i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      kIndex = i;
+    }
+  }
+  // 3) if yes, overwrite value; if no, push a new tuple
+  if (kIndex !== -1) {
+    bucket[kIndex][1] = v;
+  } else {
+    bucket.push([k,v]);
+  }
+  // 4) put the bucket back
+  this._storage.set(index, bucket);
+  //storage[index] = bucket = [[k, v], [k2, v2]....]
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  return this._storage.get(index);
+  var bucket = this._storage.get(index) || [];
+  var kIndex = -1;
+  for (var i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      kIndex = i;
+    }
+  }
+  if (kIndex !== -1) {
+    return bucket[kIndex][1];
+  } else {
+    return undefined;
+  }
 };
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   this._storage.set(index, undefined);
+  var bucket = this._storage.get(index) || [];
+  var kIndex = -1;
+  for (var i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      kIndex = i;
+    }
+  }
+  if (kIndex !== -1) {
+    bucket.splice(kIndex, 1);
+  }
+
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ O(1) for all functions because size of bucket is negligible to size of hash table
  */
 
 
