@@ -13,12 +13,16 @@
         <option value="queue">queue</option>
       </select><br>
       <label>Implementation: </label><select id="implementation">
-        <option value="es6">es6</option>
-        <option value="functional">functional</option>
-        <option value="functional-shared">functional-shared</option>
-        <option value="prototypal">prototypal</option>
-        <option value="pseudoclassical">pseudoclassical</option>
-        <option value="fastpseudo">pseudoclassical (faster?)</option>
+        <option value="es6-array">es6 (arraylike)</option>
+        <option value="es6-fast">es6 (head/tail)</option>
+        <option value="functional-array">functional (arraylike)</option>
+        <option value="functional-fast">functional (head/tail)</option>
+        <option value="functional-shared-array">functional-shared (arraylike)</option>
+        <option value="functional-shared-fast">functional-shared (head/tail)</option>
+        <option value="prototypal-array">prototypal (arraylike)</option>
+        <option value="prototypal-fast">prototypal (head/tail)</option>
+        <option value="pseudoclassical-array">pseudoclassical (arraylike)</option>
+        <option value="pseudoclassical-fast">pseudoclassical (head/tail)</option>
       </select><br>
       <button onclick="testNow();">TEST</button>
         <script>
